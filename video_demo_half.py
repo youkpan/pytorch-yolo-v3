@@ -8,7 +8,7 @@ import cv2
 from util import *
 from darknet import Darknet
 from preprocess import prep_image, inp_to_image, letterbox_image
-import pandas as pd
+#import pandas as pd
 import random 
 import pickle as pkl
 import argparse
@@ -113,7 +113,7 @@ if __name__ == '__main__':
 
     model.eval()
     
-    videofile = 'video.avi'
+    videofile = 'F:\\project\\pytorch-yolo-v3\\MVI_0170.avi'
     
     cap = cv2.VideoCapture(videofile)
     

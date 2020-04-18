@@ -11,11 +11,11 @@ import os
 import os.path as osp
 from darknet import Darknet
 from preprocess import prep_image, inp_to_image
-import pandas as pd
+#import pandas as pd
 import random 
 import pickle as pkl
 import itertools
-
+import datetime
 class test_net(nn.Module):
     def __init__(self, num_layers, input_size):
         super(test_net, self).__init__()
@@ -132,6 +132,7 @@ if __name__ ==  '__main__':
     model.eval()
     
     read_dir = time.time()
+    begint = datetime.datetime.now()
     #Detection phase
     try:
         imlist = [osp.join(osp.realpath('.'), images, img) for img in os.listdir(images) if os.path.splitext(img)[1] == '.png' or os.path.splitext(img)[1] =='.jpeg' or os.path.splitext(img)[1] =='.jpg']
@@ -298,14 +299,16 @@ if __name__ ==  '__main__':
     
             
     list(map(lambda x: write(x, im_batches, orig_ims), output))
-      
-    det_names = pd.Series(imlist).apply(lambda x: "{}/det_{}".format(args.det,x.split("/")[-1]))
+    #print("{}/det_{}".format(args.det,x.split("/")[-1]))
+    #det_names = pd.Series(imlist).apply(lambda x: "{}/det_{}".format(args.det,x.split("/")[-1]))
     
-    list(map(cv2.imwrite, det_names, orig_ims))
+    #list(map(cv2.imwrite, det_names, orig_ims))
     
     end = time.time()
-    
-    print()
+    endt = datetime.datetime.now()
+    print("time:",(endt - begint).total_seconds())
+    print("")
+
     print("SUMMARY")
     print("----------------------------------------------------------")
     print("{:25s}: {}".format("Task", "Time Taken (in seconds)"))
